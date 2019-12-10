@@ -1,0 +1,79 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "UUID Plugin\n\n\nRFC 4122-compliant v5 UUID generator for your \nCorona\n games and applications.\n\n\nThe \nUUID\n plugin allows you to generate universally unique identifiers. Includes special methods for saving and loading UUIDs on the device, as well as, creating batches.\n\n\n\n\nGet the Plugin\n\n\nIf you don't already have it, get the \nUUID\n plugin from the \nCorona Marketplace\n.\n\n\n\n\nAdd the Plugin\n\n\nAdd the plugin by adding an entry to the \nplugins\n table of \nbuild.settings\n file:\n\n\nsettings =\n{\n    plugins =\n    {\n        [\"plugin.uuid\"] =\n        {\n            publisherId = \"com.develephant\"\n        },\n    },\n}\n\n\n\n\n\n\n\nRequire the Plugin\n\n\nlocal\n \nUUID\n \n=\n \nrequire\n(\n\"plugin.uuid\"\n)\n\n\n\n\n\n\n\n\nYou're all set to go! Have a look at the \nAPI\n documentation to start working with the plugin.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#uuid-plugin",
+            "text": "RFC 4122-compliant v5 UUID generator for your  Corona  games and applications.  The  UUID  plugin allows you to generate universally unique identifiers. Includes special methods for saving and loading UUIDs on the device, as well as, creating batches.",
+            "title": "UUID Plugin"
+        },
+        {
+            "location": "/#get-the-plugin",
+            "text": "If you don't already have it, get the  UUID  plugin from the  Corona Marketplace .",
+            "title": "Get the Plugin"
+        },
+        {
+            "location": "/#add-the-plugin",
+            "text": "Add the plugin by adding an entry to the  plugins  table of  build.settings  file:  settings =\n{\n    plugins =\n    {\n        [\"plugin.uuid\"] =\n        {\n            publisherId = \"com.develephant\"\n        },\n    },\n}",
+            "title": "Add the Plugin"
+        },
+        {
+            "location": "/#require-the-plugin",
+            "text": "local   UUID   =   require ( \"plugin.uuid\" )    You're all set to go! Have a look at the  API  documentation to start working with the plugin.",
+            "title": "Require the Plugin"
+        },
+        {
+            "location": "/api/",
+            "text": "UUID Plugin API\n\n\n\nnew\n\n\nCreate a new universally unique identifier.\n\n\nUUID\n.\nnew\n()\n\n\n\n\n\n\nArguments\n\n\nThis method takes no arguments.\n\n\nReturns\n\n\nA new UUID as a \nString\n.\n\n\nExample\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nnew\n()\n\n\n\nprint\n(\nuuid\n)\n \n--> 5D91AFDF-17D1-5942-9216-E593BD9EC80A\n\n\n\n\n\n\nNotes\n\n\n\n\nIf you want to generate multiple UUIDs in one pass, \ndo not\n use a \nfor\n loop with this method. See the \nbatch\n method instead.\n\n\n\n\n\n\nsave\n\n\nCreate and save a persistent universally unique identifier to the device. The UUID is saved to the \nDocuments\n directory.\n\n\nBy default the filename is \"_uuid\", but can be changed by providing a name to the \nfilename\n argument.\n\n\nIf a saved UUID already exists, you must pass the \noverwrite\n flag to save a new UUID.\n\n\nUUID\n.\nsave\n([\noverwrite\n,][\n \nfilename\n])\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\noverwrite\n\n\nGenerate a new UUID and overwrite the existing saved file.\n\n\nBoolean\n\n\nN\n\n\n\n\n\n\nfilename\n\n\nAn alternative name for the saved UUID. Defaults to \"_uuid\".\n\n\nString\n\n\nN\n\n\n\n\n\n\n\n\nReturns\n\n\nOn success, a new UUID as a \nString\n, or \nnil\n and an error.\n\n\nExamples\n\n\n-- Create and save a UUID\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nsave\n()\n\n\n\n-- Overwrite a saved UUID\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nsave\n(\ntrue\n)\n\n\n\n-- Use a alternative name\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nsave\n(\n\"_userid\"\n)\n\n\n\n-- Overwrite with the alternative name\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nsave\n(\ntrue\n,\n \n\"_userid\"\n)\n\n\n\n-- With error checking\n\n\nlocal\n \nuuid\n,\n \nerr\n \n=\n \nUUID\n.\nsave\n([\nargs\n])\n\n\n\nif\n \nnot\n \nuuid\n \nthen\n\n  \nprint\n(\nerr\n)\n\n\nend\n\n\n\n\n\n\nNotes\n\n\n\n\n\n\nIf you save a UUID with an alternative name and wish to overwrite it, you must pass the \noverwrite\n flag, as well as the alternative name it was saved with.\n\n\n\n\n\n\nYou can generate and save multiple UUIDs by using the \nfilename\n argument with different values. Load them by passing the same name to the \nload\n method.\n\n\n\n\n\n\n\n\nload\n\n\nLoad a \nsaved\n universally unique identifier from the device. The UUID is loaded from the \nDocuments\n directory.\n\n\nBy default the filename loaded is \"_uuid\", but can be changed by providing a name to the \nfilename\n argument.\n\n\nTo guarantee a UUID will be loaded, you can pass the \ncreate\n flag to have a newly \nsaved\n UUID generated. If the file already exists, this flag is ignored.\n\n\nUUID\n.\nload\n([\ncreate\n,][\n \nfilename\n])\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\ncreate\n\n\nGenerate a new \nsaved\n UUID if no file is found to load.\n\n\nBoolean\n\n\nN\n\n\n\n\n\n\nfilename\n\n\nAn alternative name to load the UUID from. Defaults to \"_uuid\".\n\n\nString\n\n\nN\n\n\n\n\n\n\n\n\nReturns\n\n\nOn success, the \nsaved\n UUID as a \nString\n, or \nnil\n and an error.\n\n\nExample\n\n\n-- Load a saved UUID\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nload\n()\n\n\n\n-- Create a new UUID file if none exists\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nload\n(\ntrue\n)\n\n\n\n-- Load using an alternative name\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nload\n(\n\"_userid\"\n)\n\n\n\n-- Create a new UUID file if none exists\n\n\n-- Use an alternative name for the file.\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\nload\n(\ntrue\n,\n \n\"_userid\"\n)\n\n\n\n-- With error checking\n\n\nlocal\n \nuuid\n,\n \nerr\n \n=\n \nUUID\n.\nload\n([\nargs\n])\n\n\n\nif\n \nnot\n \nuuid\n \nthen\n\n  \nprint\n(\nerr\n)\n\n\nend\n\n\n\n\n\n\nNotes\n\n\n\n\nIf the UUID you want to load was \nsaved\n with an alternative name, you must pass that name to the \nfilename\n argument when calling the \nload\n method.\n\n\n\n\n\n\ndelete\n\n\nDelete a \nsaved\n universally unique identifier from the device. The UUID is removed from the \nDocuments\n directory.\n\n\nUUID\n.\ndelete\n([\nfilename\n])\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\nfilename\n\n\nAn alternative filename used for deletion.\n\n\nString\n\n\nN\n\n\n\n\n\n\n\n\nReturns\n\n\nOn success, the \nBoolean\n \ntrue\n, or \nnil\n and an error.\n\n\nExample\n\n\n-- Delete a saved UUID\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\ndelete\n()\n\n\n\n-- Delete with the alternative name\n\n\nlocal\n \nuuid\n \n=\n \nUUID\n.\ndelete\n(\n\"_userid\"\n)\n\n\n\n-- With error checking\n\n\nlocal\n \nok\n,\n \nerr\n \n=\n \nUUID\n.\ndelete\n([\nargs\n])\n\n\n\nif\n \nnot\n \nok\n \nthen\n\n  \nprint\n(\nerr\n)\n\n\nend\n\n\n\n\n\n\nNotes\n\n\n\n\nIf the UUID you want to delete was \nsaved\n with an alternative name, you must pass that name to the \nfilename\n argument when calling the \ndelete\n method.\n\n\n\n\n\n\nbatch\n\n\nCreate multiple universally unique identifiers in one pass.\n\n\nWhile UUIDs are generated with millisecond precision, if trying to produce multiple UUIDs using a \nfor\n loop you \nmay\n generate a duplicate UUID. Use this method instead to guarantee a batch of unique ids.\n\n\nUUID\n.\nbatch\n(\ncount\n)\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\ncount\n\n\nThe amount of UUIDs to generate.\n\n\nNumber\n\n\nY\n\n\n\n\n\n\n\n\nReturns\n\n\nA \nTable\n array of UUIDs.\n\n\nExample\n\n\n--Generate 10 UUIDs\n\n\nlocal\n \nuuids\n \n=\n \nUUID\n.\nbatch\n(\n10\n)\n\n\n\nfor\n \ni\n=\n1\n,\n \n#\nuuids\n \ndo\n\n  \nprint\n(\nuuids\n[\ni\n])\n\n\nend\n\n\n\n\n\n\nNotes\n\n\n\n\nBatches are not saved to any file.",
+            "title": "API"
+        },
+        {
+            "location": "/api/#new",
+            "text": "Create a new universally unique identifier.  UUID . new ()   Arguments  This method takes no arguments.  Returns  A new UUID as a  String .  Example  local   uuid   =   UUID . new ()  print ( uuid )   --> 5D91AFDF-17D1-5942-9216-E593BD9EC80A   Notes   If you want to generate multiple UUIDs in one pass,  do not  use a  for  loop with this method. See the  batch  method instead.",
+            "title": "new"
+        },
+        {
+            "location": "/api/#save",
+            "text": "Create and save a persistent universally unique identifier to the device. The UUID is saved to the  Documents  directory.  By default the filename is \"_uuid\", but can be changed by providing a name to the  filename  argument.  If a saved UUID already exists, you must pass the  overwrite  flag to save a new UUID.  UUID . save ([ overwrite ,][   filename ])   Arguments     Name  Description  Type  Required      overwrite  Generate a new UUID and overwrite the existing saved file.  Boolean  N    filename  An alternative name for the saved UUID. Defaults to \"_uuid\".  String  N     Returns  On success, a new UUID as a  String , or  nil  and an error.  Examples  -- Create and save a UUID  local   uuid   =   UUID . save ()  -- Overwrite a saved UUID  local   uuid   =   UUID . save ( true )  -- Use a alternative name  local   uuid   =   UUID . save ( \"_userid\" )  -- Overwrite with the alternative name  local   uuid   =   UUID . save ( true ,   \"_userid\" )  -- With error checking  local   uuid ,   err   =   UUID . save ([ args ])  if   not   uuid   then \n   print ( err )  end   Notes    If you save a UUID with an alternative name and wish to overwrite it, you must pass the  overwrite  flag, as well as the alternative name it was saved with.    You can generate and save multiple UUIDs by using the  filename  argument with different values. Load them by passing the same name to the  load  method.",
+            "title": "save"
+        },
+        {
+            "location": "/api/#load",
+            "text": "Load a  saved  universally unique identifier from the device. The UUID is loaded from the  Documents  directory.  By default the filename loaded is \"_uuid\", but can be changed by providing a name to the  filename  argument.  To guarantee a UUID will be loaded, you can pass the  create  flag to have a newly  saved  UUID generated. If the file already exists, this flag is ignored.  UUID . load ([ create ,][   filename ])   Arguments     Name  Description  Type  Required      create  Generate a new  saved  UUID if no file is found to load.  Boolean  N    filename  An alternative name to load the UUID from. Defaults to \"_uuid\".  String  N     Returns  On success, the  saved  UUID as a  String , or  nil  and an error.  Example  -- Load a saved UUID  local   uuid   =   UUID . load ()  -- Create a new UUID file if none exists  local   uuid   =   UUID . load ( true )  -- Load using an alternative name  local   uuid   =   UUID . load ( \"_userid\" )  -- Create a new UUID file if none exists  -- Use an alternative name for the file.  local   uuid   =   UUID . load ( true ,   \"_userid\" )  -- With error checking  local   uuid ,   err   =   UUID . load ([ args ])  if   not   uuid   then \n   print ( err )  end   Notes   If the UUID you want to load was  saved  with an alternative name, you must pass that name to the  filename  argument when calling the  load  method.",
+            "title": "load"
+        },
+        {
+            "location": "/api/#delete",
+            "text": "Delete a  saved  universally unique identifier from the device. The UUID is removed from the  Documents  directory.  UUID . delete ([ filename ])   Arguments     Name  Description  Type  Required      filename  An alternative filename used for deletion.  String  N     Returns  On success, the  Boolean   true , or  nil  and an error.  Example  -- Delete a saved UUID  local   uuid   =   UUID . delete ()  -- Delete with the alternative name  local   uuid   =   UUID . delete ( \"_userid\" )  -- With error checking  local   ok ,   err   =   UUID . delete ([ args ])  if   not   ok   then \n   print ( err )  end   Notes   If the UUID you want to delete was  saved  with an alternative name, you must pass that name to the  filename  argument when calling the  delete  method.",
+            "title": "delete"
+        },
+        {
+            "location": "/api/#batch",
+            "text": "Create multiple universally unique identifiers in one pass.  While UUIDs are generated with millisecond precision, if trying to produce multiple UUIDs using a  for  loop you  may  generate a duplicate UUID. Use this method instead to guarantee a batch of unique ids.  UUID . batch ( count )   Arguments     Name  Description  Type  Required      count  The amount of UUIDs to generate.  Number  Y     Returns  A  Table  array of UUIDs.  Example  --Generate 10 UUIDs  local   uuids   =   UUID . batch ( 10 )  for   i = 1 ,   # uuids   do \n   print ( uuids [ i ])  end   Notes   Batches are not saved to any file.",
+            "title": "batch"
+        },
+        {
+            "location": "/demo/",
+            "text": "Download\n\n\nClick \nhere\n to download a Corona demo project.\n\n\nDemo Instructions\n\n\n\n\n\n\nRun the project, tap the buttons.\n\n\n\n\n\n\nView saved UUIDs in the \nDocuments\n sandbox directory.",
+            "title": "Demo Project"
+        },
+        {
+            "location": "/about/",
+            "text": "UUID Plugin\n\n\nCode and documentation \u00a92018 C. Byerley (\ndevelephant\n).\n\n\nSupport\n\n\nCorona Community Plugins Forum",
+            "title": "About"
+        },
+        {
+            "location": "/about/#uuid-plugin",
+            "text": "Code and documentation \u00a92018 C. Byerley ( develephant ).",
+            "title": "UUID Plugin"
+        },
+        {
+            "location": "/about/#support",
+            "text": "Corona Community Plugins Forum",
+            "title": "Support"
+        }
+    ]
+}
